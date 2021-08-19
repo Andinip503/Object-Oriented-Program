@@ -1,0 +1,69 @@
+package week3;
+import java.util.*;
+import java.util.Random;
+
+/**
+ *
+ * @author Andini
+ */
+public class Week3 {
+
+    /**
+     * @param args the command line arguments
+     */
+   
+      
+    //Method Set
+    
+    public static void main(String[] args) {
+        // TODO code application logic here
+     int choose;
+     int repeat=0;
+     int angka,gas=100;
+    Random numb=new Random();
+    angka=numb.nextInt(100)+1; 
+    do{
+       System.out.println("Your gasoline's car : "+gas+ " liter");
+       Scanner input=new Scanner(System.in);
+       System.out.println("===================================");
+       System.out.println("1. Start driving");
+       System.out.println("2. Rest");
+       System.out.println("3. Exit");
+       System.out.println("Choose :");
+       choose=input.nextInt();
+      switch(choose){
+       case 1: 
+           
+           System.out.println("Your speed :" +angka+ "km/hour");
+            if(angka<50 && gas>20){
+              gas=gas-20;
+              System.out.println("You have spent 20 liters gasoline ");
+            }
+            else if(angka>50 && gas>40){
+              gas=gas-40;
+            System.out.println("You have spent 40 liters gasoline ");
+            }
+            else{
+            System.out.println("Your gasoline is not enough to run the car... ");
+            }
+        repeat=1;
+        break ;
+        case 2: 
+           if(angka==100){
+             System.out.println("Your gasoline is full...");
+           }
+           else{
+            gas=gas+20;
+            System.out.println("Successfully recharge 20 liters gasoline...");
+           }
+        repeat=1;
+        break ;
+        case 3:
+         repeat=0;
+          break;  
+    }
+
+    }while(repeat==1);
+    }
+
+}
