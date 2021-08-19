@@ -1,0 +1,218 @@
+package andiniputri;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+/**
+ *
+ * @author Andini
+ */
+class transaksi{
+        //atribut
+        int nomor,jum,total;
+        double jual,beli,kursJual,kursBeli;
+        String nama,tukar,dapat,mtUang,tambah;
+        //konstruktor
+        public transaksi(String mtUang,double jual, double beli){
+                this.mtUang=mtUang;
+                this.jual=jual;
+                this.beli=beli;
+        }
+        //method
+         public void List(){
+        System.out.println(String.format("+   %-5s  | %-15f | %-15f +",mtUang, jual, beli));
+        }
+        public String MataUang(){
+               return mtUang;
+        }
+         public double Jual(){
+                return jual;
+        }
+        public double Beli(){
+            return beli;
+        }
+        
+}
+class dataTrans{
+          ArrayList<transaksi> penukaran;
+          double jumTukar,jumDapat;
+           String nama,tukar,dapat,nomor;
+         
+        public dataTrans(String nama,String nomor,String tukar,double jumTukar,String dapat,double jumDapat) {
+		this.nama=nama;
+		this.nomor=nomor;
+		this.tukar=tukar;
+                this.jumTukar=jumTukar;
+                this.dapat=dapat;
+                this.jumDapat=jumDapat;
+	}
+
+        public void List(){
+        LocalDate tanggal = LocalDate.now();
+        System.out.println(String.format("+ %-10s    | %-20s| %-20f| %-20s| %-20f+", tanggal,tukar,jumTukar,dapat,jumDapat));
+    }
+      
+
+
+}
+
+public class AndiniPutri {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        int choice,repeat=0;
+        String Username, nameUser, passUser,Password;
+        ArrayList<transaksi> penukaran = new ArrayList<>();
+        ArrayList<dataTrans> info = new ArrayList();
+        Scanner input= new Scanner(System.in);
+        Password = "123";
+        Username = "123";
+        do
+        {
+            System.out.println("*****LOGIN******");
+            Scanner input1 = new Scanner(System.in);
+            System.out.print("Masukkan username: ");
+            nameUser = input1.next();
+            System.out.print("Masukkan password: ");
+            passUser = input1.next();
+        }while(!"123".equals(Username)&&!"456".equals(Password));
+        do {
+            System.out.println("========================================");
+            System.out.println("              DUA KERTAS                ");
+            System.out.println("========================================");
+            System.out.println("1. Pendataan Nilai Tukar Mata Uang      ");
+            System.out.println("2. Pendataan Transaksi Penukaran        ");
+            System.out.println("3. Menampilkan data transaksi penukaran ");
+            System.out.println("4. Logout                               ");
+            System.out.println("========================================");
+            System.out.println("Pilihan : ");
+            choice = input.nextInt();
+            switch (choice) {
+                case 1:
+                    String mtUang = null;
+                    double jual = 0,beli = 0;
+                    int i,index;
+                    transaksi nilai=new transaksi(mtUang,jual,beli);
+                    dataList(penukaran);
+                    //int i;
+                    if(penukaran.isEmpty())
+                      {
+                        System.out.println("Tidak ada daftar mata uang!");
+                      }else
+                    {
+                    System.out.println("+=============================================+");
+                    System.out.println("+ Mata uang |    Kurs Jual   |    Kurs Beli   +");
+                    System.out.println("+=============================================+");
+                    for( i = 0; i < penukaran.size(); i++)
+                       {
+                        index = i + 1;
+                        penukaran.get(i).List();
+                       }
+                    System.out.println("+=============================================+");
+                    }
+                    repeat=1;
+                    break;
+                case 2:
+                    addList(penukaran,info);
+                    break;
+                case 3 :
+                    showList(info);
+            }
+        } while (choice!=4);
+    }
+public static void dataList(ArrayList<transaksi> penukaran) {
+        double jual,beli;
+        String mtUang,tambah;
+        Scanner input= new Scanner(System.in);
+       do{
+                do{
+                System.out.print("Masukkan Mata Uang:");
+                mtUang=input.next();
+                }while(mtUang.length()<3 || mtUang.length()>20);
+
+                System.out.print("Masukkan Kurs Jual:");
+                jual=input.nextDouble();
+                
+                System.out.print("Masukkan Kurs Beli:");
+                beli=input.nextDouble();
+                transaksi nilai=new transaksi(mtUang,jual,beli);
+                penukaran.add(nilai);
+    
+                System.out.print("Apakah anda ingin menambah data [Y/N]?");
+                tambah=input.next();
+            }while(tambah.equalsIgnoreCase("Y"));
+            
+       }
+public static void addList(ArrayList<transaksi> penukaran,ArrayList<dataTrans> info)
+    {
+        String nama,tukar,dapat,nomor,pilih;
+        String mtUang = null;
+        double kursJual = 0;
+        double kursBeli = 0;
+        double jumTukar,jumDapat;
+        Scanner input= new Scanner(System.in);
+        do
+            {
+              System.out.println("---Data Pelanggan---");
+              do{
+              System.out.println("Nama Pelanggan : ");
+              nama=input.next();
+              }while(nama.length()<3 || nama.length()>20);
+              System.out.println("Nomor Telp Pelanggan :");
+              nomor=input.next();
+              System.out.println("Mata Uang yang ditukarkan :");
+              tukar=input.next();
+              System.out.println("Jumlah uang yang ditukarkan :");
+              jumTukar=input.nextDouble();
+              System.out.println("Mata uang yang didapatkan :");
+              dapat=input.next();
+                if(tukar.equalsIgnoreCase("IDR")){
+                       for(int i = 0; i < penukaran.size(); i++){
+                           if(penukaran.get(i).MataUang().equals(dapat));
+                           {
+                               kursJual = penukaran.get(i).Jual();
+                           }
+                       }
+                        jumDapat = jumTukar / kursJual;
+                } else{
+                    for(int i = 0; i < penukaran.size(); i++){
+                           if(penukaran.get(i).MataUang().equals(dapat));
+                           {
+                               kursBeli = penukaran.get(i).Beli();
+                           }
+                       }
+                        jumDapat = jumTukar * kursBeli;
+                }             
+             System.out.println("Jumlah uang yang didapatkan :"+jumDapat);
+                dataTrans daftar = new dataTrans(nama,nomor,tukar,jumTukar,dapat,jumDapat);
+                info.add(daftar);
+
+                System.out.print("Apakah anda ingin menambah data [Y/N]?");
+                pilih = input.next();
+
+            }while(pilih.equalsIgnoreCase("Y"));
+    }
+    
+public static void showList(ArrayList<dataTrans> info){
+        String nama,tukar,dapat,nomor,pilih;
+        double jumTukar,jumDapat;
+        Scanner input= new Scanner(System.in);
+        if(info.isEmpty()){
+            System.out.println("Transaksi belum dilakukan!");
+            }else
+        {
+            System.out.println("+==============================================================================+");
+            System.out.println("+    Tanggal   | Kurs Jual | Jumlah Kurs Jual | Kurs Beli | Jumlah Kurs Beli   +");
+            System.out.println("+==============================================================================+");
+            for(int j = 0; j < info.size(); j++){
+                int jindex = j + 1;
+               info.get(j).List();
+            }
+            System.out.println("+==============================================================================+");
+        }
+        
+    }
+
+}
