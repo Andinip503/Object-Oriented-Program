@@ -1,0 +1,69 @@
+package week5;
+import java.util.*;
+/**
+ *
+ * @author Andini
+ */
+public class Week5 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void step(int a){
+        int i;
+        int biner[]=new int[50];
+        for(i=0;a>0;i++){
+           biner[i]=a%2;
+           a=a/2;
+           System.out.println("Step "+(i+1)+ ": "+a+"/2, ");
+           System.out.println("Reminder = " + biner[i]);
+       }
+
+
+  }
+    public static void main(String[] args) {
+        // TODO code application logic here
+    
+    int num,choose;
+    int repeat=0;
+    int i;
+    String intBinary=null;
+     do{
+       Scanner input=new Scanner(System.in);
+       System.out.println("Binary Number Calculation");
+       System.out.println("===========================");
+       System.out.println("1. Binary Number ");
+       System.out.println("2. Binary with step ");
+       System.out.println("3. Exit");
+       System.out.println("Choose :");
+       choose=input.nextInt();
+      switch(choose){
+       case 1:
+          do{ 
+           System.out.println("Input the Number [1-100] : ");
+           num=input.nextInt();
+          }while(num<1||num>100);
+          intBinary=Integer.toBinaryString(num);
+          System.out.println("The result of binary Number " + num + ": " +intBinary);
+          repeat=1;
+          break;
+        case 2 :
+            do{ 
+           System.out.println("Input the Number [1-100] : ");
+           num=input.nextInt();
+          }while(num<1||num>100);
+           System.out.println("The result of binary number ");
+          step(num);
+           repeat=1;
+           break;
+
+        case 3:
+              System.out.println("Thank you and have a nice day...");
+              break;
+        
+
+    }
+}while(repeat==1);
+
+}
+}
